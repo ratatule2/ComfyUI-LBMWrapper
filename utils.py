@@ -103,11 +103,19 @@ def get_model_from_config(
 
     ## VAE ##
     # Get VAE model
+    # vae_config = AutoencoderKLDiffusersConfig(
+    #     version=backbone_signature,
+    #     subfolder="vae",
+    #     tiling_size=(128, 128),
+    # )
     vae_config = AutoencoderKLDiffusersConfig(
-        version=backbone_signature,
-        subfolder="vae",
-        tiling_size=(128, 128),
-    )
+        input_key='image', 
+        version='stabilityai/stable-diffusion-xl-base-1.0', 
+        subfolder='vae', 
+        revision='main', 
+        tiling_size=(128, 128), 
+        tiling_overlap=(16, 16))
+
     vae = AutoencoderKLDiffusers(vae_config).to(torch.bfloat16)
     vae.freeze()
     vae.to(torch.bfloat16)
@@ -122,11 +130,26 @@ def get_model_from_config(
         prob=prob,
         bridge_noise_sigma=bridge_noise_sigma,
     )
-
-    sampling_noise_scheduler = FlowMatchEulerDiscreteScheduler.from_pretrained(
-        backbone_signature,
-        subfolder="scheduler",
-    )
+    scheduler_config = {
+        'num_train_timesteps': 1000, 
+        'shift': 1.0, 
+        'use_dynamic_shifting': False, 
+        'base_shift': 0.5, 'max_shift': 1.15, 
+        'base_image_seq_len': 256, 'max_image_seq_len': 4096, 
+        'invert_sigmas': False, 'shift_terminal': None, 
+        'use_karras_sigmas': False, 'use_exponential_sigmas': False, 
+        'use_beta_sigmas': False, 'time_shift_type': 'exponential', 
+        '_use_default_values': ['time_shift_type', 'max_image_seq_len', 
+        'max_shift', 'base_image_seq_len', 'use_dynamic_shifting', 'invert_sigmas', 
+        'shift', 'use_beta_sigmas', 'base_shift', 'use_exponential_sigmas', 
+        'shift_terminal'], '_class_name': 'FlowMatchEulerDiscreteScheduler', 
+        '_diffusers_version': '0.19.0.dev0', 'beta_end': 0.012, 'beta_schedule': 
+        'scaled_linear', 'beta_start': 0.00085, 'clip_sample': False, 'interpolation_type': 
+        'linear', 'prediction_type': 'epsilon', 'sample_max_value': 1.0, 'set_alpha_to_one': False, 
+        'skip_prk_steps': True, 'steps_offset': 1, 'timestep_spacing': 'leading', 
+        'trained_betas': None
+    }
+    sampling_noise_scheduler = FlowMatchEulerDiscreteScheduler.from_config(scheduler_config)
 
     model = LBMModel(
         config,
