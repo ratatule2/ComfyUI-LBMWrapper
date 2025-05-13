@@ -14,16 +14,11 @@ class AutoencoderKLDiffusers(BaseModel):
         config (AutoencoderKLDiffusersConfig): The config class which defines all the required parameters.
     """
 
-    def __init__(self, config: AutoencoderKLDiffusersConfig):
-        BaseModel.__init__(self, config)
-        self.config = config
-        self.vae_model = AutoencoderKL.from_pretrained(
-            config.version,
-            subfolder=config.subfolder,
-            revision=config.revision,
-        )
-        self.tiling_size = config.tiling_size
-        self.tiling_overlap = config.tiling_overlap
+    def __init__(self, vae_model):
+        BaseModel.__init__(self)
+        self.vae_model = vae_model
+        self.tiling_size =(128, 128)
+        self.tiling_overlap = (16, 16)
 
         # get downsampling factor
         self._get_properties()
@@ -51,11 +46,7 @@ class AutoencoderKLDiffusers(BaseModel):
         self.latents_mean = self.vae_model.config.latents_mean
         self.latents_std = self.vae_model.config.latents_std
 
-        x = torch.randn(1, self.vae_model.config.in_channels, 32, 32)
-        z = self.encode(x)
-
-        # set downsampling factor
-        self.downsampling_factor = int(x.shape[2] / z.shape[2])
+        self.downsampling_factor = 8
 
     def encode(self, x: torch.tensor, batch_size: int = 8):
         latents = []

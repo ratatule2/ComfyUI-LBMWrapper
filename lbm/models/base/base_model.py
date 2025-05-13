@@ -7,10 +7,10 @@ from .model_config import ModelConfig
 
 
 class BaseModel(nn.Module):
-    def __init__(self, config: ModelConfig):
+    def __init__(self, config=None):
         nn.Module.__init__(self)
         self.config = config
-        self.input_key = config.input_key
+        self.input_key = "image"
         self.device = torch.device("cpu")
         self.dtype = torch.float32
 

@@ -1,4 +1,3 @@
-import os
 from typing import List
 
 import torch
@@ -13,11 +12,10 @@ from .lbm.models.embedders import (
 )
 from .lbm.models.lbm import LBMConfig, LBMModel
 from .lbm.models.unets import DiffusersUNet2DCondWrapper
-from .lbm.models.vae import AutoencoderKLDiffusers, AutoencoderKLDiffusersConfig
-
+from .lbm.models.vae import AutoencoderKLDiffusers
+from diffusers.models import AutoencoderKL
 
 def get_model_from_config(
-    backbone_signature: str = "stabilityai/stable-diffusion-xl-base-1.0",
     vae_num_channels: int = 4,
     unet_input_channels: int = 4,
     timestep_sampling: str = "log_normal",
@@ -101,22 +99,40 @@ def get_model_from_config(
         conditioners=conditioners,
     )
 
-    ## VAE ##
-    # Get VAE model
-    # vae_config = AutoencoderKLDiffusersConfig(
-    #     version=backbone_signature,
-    #     subfolder="vae",
-    #     tiling_size=(128, 128),
-    # )
-    vae_config = AutoencoderKLDiffusersConfig(
-        input_key='image', 
-        version='stabilityai/stable-diffusion-xl-base-1.0', 
-        subfolder='vae', 
-        revision='main', 
-        tiling_size=(128, 128), 
-        tiling_overlap=(16, 16))
-
-    vae = AutoencoderKLDiffusers(vae_config).to(torch.bfloat16)
+    vae_config = {
+        "_class_name": "AutoencoderKL",
+        "_diffusers_version": "0.20.0.dev0",
+        "_name_or_path": "../sdxl-vae/",
+        "act_fn": "silu",
+        "block_out_channels": [
+            128,
+            256,
+            512,
+            512
+        ],
+        "down_block_types": [
+            "DownEncoderBlock2D",
+            "DownEncoderBlock2D",
+            "DownEncoderBlock2D",
+            "DownEncoderBlock2D"
+        ],
+        "force_upcast": True,
+        "in_channels": 3,
+        "latent_channels": 4,
+        "layers_per_block": 2,
+        "norm_num_groups": 32,
+        "out_channels": 3,
+        "sample_size": 1024,
+        "scaling_factor": 0.13025,
+        "up_block_types": [
+            "UpDecoderBlock2D",
+            "UpDecoderBlock2D",
+            "UpDecoderBlock2D",
+            "UpDecoderBlock2D"
+        ]
+        }
+    
+    vae = AutoencoderKLDiffusers(AutoencoderKL.from_config(vae_config))
     vae.freeze()
     vae.to(torch.bfloat16)
 
