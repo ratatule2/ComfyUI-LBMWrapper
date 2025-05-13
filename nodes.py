@@ -98,14 +98,14 @@ class LBMSampler:
         mm.cleanup_models()
         mm.soft_empty_cache()
 
-
         input_image = image.clone().permute(0, 3, 1, 2).to(device, model.dtype) * 2 - 1
 
         batch = {
             "source_image": input_image,
         }
-
+        model.vae.to(device)
         z_source = model.vae.encode(batch[model.source_key])
+        model.vae.to(offload_device)
 
         model.to(device)
 

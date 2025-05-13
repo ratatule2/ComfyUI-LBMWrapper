@@ -2,81 +2,8 @@
   "id": "394ed254-7306-42a2-9ae6-aa880ce4456d",
   "revision": 0,
   "last_node_id": 1947,
-  "last_link_id": 5560,
+  "last_link_id": 5561,
   "nodes": [
-    {
-      "id": 1940,
-      "type": "ImageResizeKJv2",
-      "pos": [
-        1430.7935791015625,
-        2517.883056640625
-      ],
-      "size": [
-        270,
-        242
-      ],
-      "flags": {},
-      "order": 7,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "link": 5546
-        },
-        {
-          "name": "width",
-          "type": "INT",
-          "widget": {
-            "name": "width"
-          },
-          "link": 5555
-        },
-        {
-          "name": "height",
-          "type": "INT",
-          "widget": {
-            "name": "height"
-          },
-          "link": 5556
-        }
-      ],
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            5547
-          ]
-        },
-        {
-          "name": "width",
-          "type": "INT",
-          "links": null
-        },
-        {
-          "name": "height",
-          "type": "INT",
-          "links": null
-        }
-      ],
-      "properties": {
-        "cnr_id": "comfyui-kjnodes",
-        "ver": "bec42252c690c1b5b2064b5a6732ad11cc452759",
-        "Node name for S&R": "ImageResizeKJv2"
-      },
-      "widgets_values": [
-        1024,
-        1024,
-        "lanczos",
-        "crop",
-        "0, 0, 0",
-        "center",
-        2
-      ],
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
-    },
     {
       "id": 1938,
       "type": "ImageRemoveBackground+",
@@ -100,7 +27,7 @@
         {
           "name": "image",
           "type": "IMAGE",
-          "link": 5542
+          "link": 5561
         }
       ],
       "outputs": [
@@ -259,110 +186,6 @@
       "bgcolor": "#3f5159"
     },
     {
-      "id": 1932,
-      "type": "LoadImage",
-      "pos": [
-        907.7509765625,
-        3186.892578125
-      ],
-      "size": [
-        505.674072265625,
-        597.9466552734375
-      ],
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            5536,
-            5542
-          ]
-        },
-        {
-          "name": "MASK",
-          "type": "MASK",
-          "links": null
-        }
-      ],
-      "title": "Load Image: Subject",
-      "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.3.32",
-        "Node name for S&R": "LoadImage"
-      },
-      "widgets_values": [
-        "oldman_upscaled.png",
-        "image"
-      ],
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
-    },
-    {
-      "id": 1933,
-      "type": "ImageResizeKJv2",
-      "pos": [
-        1458.5428466796875,
-        2929.970703125
-      ],
-      "size": [
-        270,
-        242
-      ],
-      "flags": {},
-      "order": 5,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "link": 5536
-        }
-      ],
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            5544
-          ]
-        },
-        {
-          "name": "width",
-          "type": "INT",
-          "links": [
-            5555
-          ]
-        },
-        {
-          "name": "height",
-          "type": "INT",
-          "links": [
-            5556
-          ]
-        }
-      ],
-      "properties": {
-        "cnr_id": "comfyui-kjnodes",
-        "ver": "bec42252c690c1b5b2064b5a6732ad11cc452759",
-        "Node name for S&R": "ImageResizeKJv2"
-      },
-      "widgets_values": [
-        1024,
-        1024,
-        "lanczos",
-        "crop",
-        "0, 0, 0",
-        "center",
-        2
-      ],
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
-    },
-    {
       "id": 1936,
       "type": "ImageCompositeMasked",
       "pos": [
@@ -473,7 +296,7 @@
         106.04199981689453
       ],
       "flags": {},
-      "order": 3,
+      "order": 2,
       "mode": 0,
       "inputs": [
         {
@@ -515,7 +338,7 @@
         91.30180358886719
       ],
       "flags": {},
-      "order": 4,
+      "order": 3,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -525,6 +348,183 @@
       ],
       "color": "#432",
       "bgcolor": "#653"
+    },
+    {
+      "id": 1932,
+      "type": "LoadImage",
+      "pos": [
+        907.7509765625,
+        3186.892578125
+      ],
+      "size": [
+        505.674072265625,
+        597.9466552734375
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            5536
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "title": "Load Image: Subject",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.32",
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "oldman_upscaled.png",
+        "image"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 1933,
+      "type": "ImageResizeKJv2",
+      "pos": [
+        1458.5428466796875,
+        2929.970703125
+      ],
+      "size": [
+        270,
+        242
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 5536
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            5544,
+            5561
+          ]
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": [
+            5555
+          ]
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": [
+            5556
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-kjnodes",
+        "ver": "bec42252c690c1b5b2064b5a6732ad11cc452759",
+        "Node name for S&R": "ImageResizeKJv2"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        "lanczos",
+        "crop",
+        "0, 0, 0",
+        "center",
+        8
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 1940,
+      "type": "ImageResizeKJv2",
+      "pos": [
+        1430.7935791015625,
+        2517.883056640625
+      ],
+      "size": [
+        270,
+        242
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 5546
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          },
+          "link": 5555
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          },
+          "link": 5556
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            5547
+          ]
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-kjnodes",
+        "ver": "bec42252c690c1b5b2064b5a6732ad11cc452759",
+        "Node name for S&R": "ImageResizeKJv2"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        "lanczos",
+        "crop",
+        "0, 0, 0",
+        "center",
+        8
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
     }
   ],
   "links": [
@@ -543,14 +543,6 @@
       1938,
       0,
       "REMBG_SESSION"
-    ],
-    [
-      5542,
-      1932,
-      0,
-      1938,
-      1,
-      "IMAGE"
     ],
     [
       5543,
@@ -631,6 +623,14 @@
       1945,
       0,
       "IMAGE"
+    ],
+    [
+      5561,
+      1933,
+      0,
+      1938,
+      1,
+      "IMAGE"
     ]
   ],
   "groups": [],
@@ -639,8 +639,8 @@
     "ds": {
       "scale": 0.7513148009015783,
       "offset": [
-        -555.930115214708,
-        -2273.178706184692
+        -439.68955686509867,
+        -2329.080706184691
       ]
     },
     "frontendVersion": "1.19.4",
