@@ -1,0 +1,15 @@
+[project]
+name = "lbmwrapper"
+description = "ComfyUI-LBMWrapper is a user-friendly interface designed to simplify the integration of lightweight models into your projects. It streamlines workflows by providing essential tools for managing and deploying models with ease."
+version = "1.0.0"
+license = {file = "LICENSE"}
+dependencies = ["diffusers", "accelerate"]
+
+[project.urls]
+Repository = "https://github.com/ratatule2/ComfyUI-LBMWrapper"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = ""
+DisplayName = "ComfyUI-LBMWrapper"
+Icon = ""
